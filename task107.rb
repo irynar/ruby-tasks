@@ -1,19 +1,26 @@
-puts 'Please enter any natural number bigger than 1:'
-n = gets.chomp.to_i
+class Task
+  attr_accessor :results
 
-def calc(n)
-  results = []
-  (1..n).each do |k|
-    (4**k < n) ? results.push(k) : results
+  def calc(n)
+    (1..n).each do |k|
+      (4**k < n) ? results.push(k) : results
+    end
+    results
+  end
+
+  private
+
+  def results
+    @results ||= []
   end
 end
 
-def max(n)
-  n.max
-end
+puts 'Please enter any natural number bigger than 1:'
+n = gets.chomp.to_i
+task = Task.new
 
 if n > 1
-  calculated = max(calc(n))
+  calculated = task.calc(n).max
   if calculated
     p calculated
   else
